@@ -1,31 +1,27 @@
 from pathlib import Path
 import os
 import dj_database_url
-
-print(os.environ.get("DATABASE_URL"))
-
-# Load environment variables from env.py if it exists
 if os.path.isfile('env.py'):
     import env
+
+print(os.environ.get("DATABASE_URL"))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu114.gitpod.io',
-    '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu115.gitpod.io',
-    '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu115.gitpod.io',
-    'your-heroku-app.herokuapp.com',
-]
+ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net', 'https://8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net',]
+ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
+if ALLOWED_HOST:
+    ALLOWED_HOSTS.append(ALLOWED_HOST)
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
 ]
 
 CSRF_TRUSTED_ORIGIN = os.environ.get("CSRF_TRUSTED_ORIGIN")
@@ -44,6 +40,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'BLOG_APP',
 ]
+
+CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
