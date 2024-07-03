@@ -18,8 +18,19 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu114.gitpod.io',
+    '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu115.gitpod.io',
+    '8000-tomoverment-tomozart-5f28ojf0go4.ws-eu115.gitpod.io',
     'your-heroku-app.herokuapp.com',
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.gitpod.io",
+    "https://*.herokuapp.com"
+]
+
+CSRF_TRUSTED_ORIGIN = os.environ.get("CSRF_TRUSTED_ORIGIN")
+if CSRF_TRUSTED_ORIGIN:
+    CSRF_TRUSTED_ORIGINS.append(CSRF_TRUSTED_ORIGIN)
 
 # Application definition
 INSTALLED_APPS = [
