@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net', 'https://8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net',]
+ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net']
 ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
 if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
@@ -22,11 +22,13 @@ if ALLOWED_HOST:
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
     "https://*.herokuapp.com",
+    "https://*.codeinstitute-ide.net"
 ]
-
 CSRF_TRUSTED_ORIGIN = os.environ.get("CSRF_TRUSTED_ORIGIN")
 if CSRF_TRUSTED_ORIGIN:
     CSRF_TRUSTED_ORIGINS.append(CSRF_TRUSTED_ORIGIN)
+
+print(CSRF_TRUSTED_ORIGINS)
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,10 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary_storage',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'cloudinary',
     'BLOG_APP',
 ]
 
+SITE_ID=1
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 MIDDLEWARE = [
@@ -52,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'PROJ_TOMO.urls'
