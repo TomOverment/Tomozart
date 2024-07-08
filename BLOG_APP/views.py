@@ -7,3 +7,6 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "index.html"
     paginate_by = 4
+
+def profile(request):
+    return render(request, 'profile.html')

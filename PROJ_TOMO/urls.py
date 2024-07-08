@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
 from BLOG_APP import views as blog_views
 
 urlpatterns = [
     path('', blog_views.PostList.as_view(), name='blog'),
     path('admin/', admin.site.urls),
+    path('accounts/', include ('allauth.urls')),
+    path('accounts/profile/', blog_views.profile, name = 'profile')
 ]

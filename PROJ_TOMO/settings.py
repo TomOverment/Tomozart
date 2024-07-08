@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '8000-tomoverment-tomozart-3rachqsxmw2.ws.codeinstitute-ide.net',]
 ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
 if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
@@ -22,7 +22,7 @@ if ALLOWED_HOST:
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
     "https://*.herokuapp.com",
-    "https://*.codeinstitute-ide.net"
+    "https://*.codeinstitute-ide.net",
 ]
 CSRF_TRUSTED_ORIGIN = os.environ.get("CSRF_TRUSTED_ORIGIN")
 if CSRF_TRUSTED_ORIGIN:
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'cloudinary',
     'BLOG_APP',
 ]
@@ -96,6 +97,8 @@ if 'DATABASE_URL' not in os.environ:
         }
     }
 
+    
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -129,3 +132,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
