@@ -10,3 +10,10 @@ class PostList(generic.ListView):
 
 def profile(request):
     return render(request, 'profile.html')
+
+class AddPostView(generic.CreateView):
+    queryset = Post.objects.filter(status=1)
+    model = Post
+    template_name = 'addpost.html'
+    fields = '__all__'
+    #fields = ('title', 'body', 'author')
