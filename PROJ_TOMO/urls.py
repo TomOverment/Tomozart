@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
 from BLOG_APP import views as blog_views
-from BLOG_APP.views import AddPostView
+from BLOG_APP.views import AddPostView, EditPostView
 
 urlpatterns = [
     path('', blog_views.PostList.as_view(), name='blog'),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('accounts/', include ('allauth.urls')),
     path('accounts/profile/', blog_views.profile, name = 'profile'),
     path('addpost/', AddPostView.as_view(), name= 'add'),
+    path('editpost/<int:pk>', EditPostView.as_view(), name='edit-post'),
 ]

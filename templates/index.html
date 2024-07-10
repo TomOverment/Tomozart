@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %} TOMOZART {% endblock %}
 
 {% block content %}
 
@@ -22,6 +23,7 @@
     </div>
 
         <!-- Blog Entries Column -->
+         <h1>Blog Posts</h1>
         <div class="col-12 mt-3 left">
             <div class="row">
                 {% for post in post_list %}
@@ -34,7 +36,7 @@
                                 </div>
                             </div>
                             <a href="#" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
+                                <h2 class="card-title"><a href="{% url 'edit-post' post.pk %}">{{ post.title }}</a></h2>
                             </a>
 
                             <hr />

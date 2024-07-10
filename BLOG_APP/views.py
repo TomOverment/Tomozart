@@ -6,7 +6,7 @@ from .models import Post
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "index.html"
-    paginate_by = 4
+    paginate_by = 6
 
 def profile(request):
     return render(request, 'profile.html')
@@ -17,3 +17,7 @@ class AddPostView(generic.CreateView):
     template_name = 'addpost.html'
     fields = '__all__'
     #fields = ('title', 'body', 'author')
+
+class EditPostView(generic.DetailView):
+    model = Post
+    template_name ="editposts.html"
