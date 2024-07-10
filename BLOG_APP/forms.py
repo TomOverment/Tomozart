@@ -1,15 +1,28 @@
 from django import forms
-from .models import post
+from .models import Post
 
-class = PostForm(forms.ModelForm):
-    class = Meta:
+class PostForm(forms.ModelForm):
+    class  Meta:
         model = Post
-        fields = ('title', 'slug', 'author', 'content', 'created_on',)
+        fields = ('title', 'author', 'content',)
 
         wigets = {
-            'title': form.TextInput(attrs={'class':'form-control'}),
-            'author': form.Select(attrs={'class':'form-control'}),
-            'content': form.Textarea(attrs={'class':'form-control'}),
-            'slug': form.TextInput(attrs={'class':'form-control'}),
+            'title': forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'Post Title'}),
+            'author': forms.Select(attrs={'class':'form-control', 'placeholder' : 'Username'}),
+            'content': forms.Textarea(attrs={'class':'form-control', 'placeholder' : 'Comment here'}),
+            #'slug': forms.TextInput(attrs={'class':'form-control'}),
+
+        }
+
+class UpdateForm(forms.ModelForm):
+    class  Meta:
+        model = Post
+        fields = ('title','author', 'content',)
+
+        wigets = {
+            'title': forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'Post Title'}),
+            #'author': forms.Select(attrs={'class':'form-control', 'placeholder' : 'Username'}),
+            'content': forms.Textarea(attrs={'class':'form-control', 'placeholder' : 'Comment here'}),
+            #'slug': forms.TextInput(attrs={'class':'form-control'}),
 
         }
