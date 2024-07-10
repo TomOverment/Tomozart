@@ -4,6 +4,22 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col col-title text-center">
+            <h1 class="text-center title"> Welcome to Thomas A Overment's (AKA Tomo's) Art Gallery</h1>
+            <p class="display-6"> Hello and welcome to my online art gallery! I am Tomo, and I am thrilled to share my world of art with you. Here, you will find a collection of my work, ranging from vibrant spray paintings to mixed media canvas work.</p>
+            <hr>
+            {% if user.is_authenticated %}
+            <a href="{% url 'account_logout' %}">
+                <button class="btn btn-success btn-login-register">Logout</button>
+            </a>
+
+            {% else %}
+            <a href="{% url 'account_login' %}"
+                 class="btn btn-success btn-login-register">Login/Register
+            </a>
+            {% endif %}
+
+    </div>
 
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
