@@ -82,9 +82,9 @@ def delete_post(request, post_id):
         return redirect('home')
     return render(request, 'BLOG_APP/post_confirm_delete.html', {'post': post})
 
-def art_gallery(request):
+def gallery(request):
     artworks = Artwork.objects.all()
-    return render(request, 'art_gallery.html', {'artworks': artworks})
+    return render(request, 'gallery.html', {'artworks': artworks})
     
 
 
