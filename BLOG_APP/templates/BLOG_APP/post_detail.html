@@ -8,12 +8,13 @@
 <p>{{ post.content }}</p>
 <br/><br/>
 <h1>Add Posts!</h1>
-
+<a href="{% url 'delete_post' post.id %}">Delete</a>
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-success">Post</button>
+        
     </form>
 </div>
 

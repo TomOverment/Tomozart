@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import Post, Comment
 from .forms import PostForm, UpdateForm, CommentForm
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, HttpResponseForbidden
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -67,6 +70,17 @@ class UpdatePost(generic.UpdateView):
     model = Post
     form_class = UpdateForm
     template_name = "BLOG_APP/editposts.html"
+
+
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user != post.author:
+        raise PermissionDenied
+    if request.method == 'POST':
+        post.delete()
+        return redirect('home')
+    return render(request, 'BLOG_APP/post_confirm_delete.html', {'post': post})
+    
 
 
 
