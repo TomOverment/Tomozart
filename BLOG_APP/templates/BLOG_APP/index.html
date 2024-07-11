@@ -13,7 +13,9 @@
                 <button class="btn btn-success btn-login-register">Logout</button>
             </a>
             {% else %}
-            <a href="{% url 'account_login' %}" class="btn btn-success btn-login-register">Login/Register</a>
+            <a href="{% url 'account_login' %}">
+                <button class="btn btn-success btn-login-register">Login/Register</button>
+            </a>
             {% endif %}
         </div>
     </div>
@@ -30,8 +32,8 @@
                             <p class="author">Author: {{ post.author }}</p>
                         </div>
                     </div>
-                    <a href="#" class="post-link">
-                        <h2 class="card-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                        <h2 class="card-title">{{ post.title }}</h2>
                     </a>
                     <hr />
                     <p class="card-text text-muted h6">{{ post.created_on }}</p>
@@ -39,7 +41,7 @@
                     {% if post.image %}
                     <img src="{{ post.image.url }}" class="img-fluid">
                     {% endif %}
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and user == post.author or user.is_staff %}
                     <a href="{% url 'update_post' post.pk %}">Edit</a>
                     <a href="{% url 'delete_post' post.id %}">Delete</a>
                     {% endif %}
@@ -68,11 +70,9 @@
 
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
             {% endif %}
         </span>
     </div>
 </div>
 {% endblock %}
-
-

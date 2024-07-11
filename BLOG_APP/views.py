@@ -7,6 +7,7 @@ from .forms import PostForm, UpdateForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseForbidden
+from .models import Artwork
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -80,6 +81,10 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('home')
     return render(request, 'BLOG_APP/post_confirm_delete.html', {'post': post})
+
+def art_gallery(request):
+    artworks = Artwork.objects.all()
+    return render(request, 'art_gallery.html', {'artworks': artworks})
     
 
 
