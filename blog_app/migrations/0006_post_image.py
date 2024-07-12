@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('BLOG_APP', '0005_remove_post_temporary_field'),
+        ('blog_app', '0005_remove_post_temporary_field'),
     ]
 
     operations = [

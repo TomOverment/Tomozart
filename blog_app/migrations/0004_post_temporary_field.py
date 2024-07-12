@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('BLOG_APP', '0003_post_created_on'),
+        ('blog_app', '0003_post_created_on'),
     ]
 
     operations = [
